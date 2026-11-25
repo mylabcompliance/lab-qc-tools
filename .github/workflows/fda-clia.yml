@@ -1,0 +1,15 @@
+name: FDA CLIA categorizations
+on:
+  schedule: [{cron: "29 14 * * 1,4"}]
+  workflow_dispatch: {}
+permissions: {contents: write}
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 bots/fda_clia.py
+      - run: |
+          git config user.name "slc-bot"; git config user.email "bot@soundlabconsult.com"
+          git add docs/data/fda-clia-recent.json
+          git commit -m "FDA CLIA categorizations $(date +%F)" && git push || echo "no changes"
