@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Method Verification Calculator: Precision, Accuracy, Range</title><meta name="description" content="Free CLIA method verification calculator: precision CV%, accuracy by method comparison (bias, slope, r) and reportable range recovery, with pass/fail."><link rel="canonical" href="https://mylabcompliance.github.io/lab-qc-tools/method-verification.html">
+<meta name="robots" content="max-image-preview:large"><meta property="og:title" content="Method Verification Calculator: Precision, Accuracy, Range"><meta property="og:description" content="Free CLIA method verification calculator: precision CV%, accuracy by method comparison (bias, slope, r) and reportable range recovery, with pass/fail."><meta property="og:url" content="https://mylabcompliance.github.io/lab-qc-tools/method-verification.html"><meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Method Verification Calculator","url":"https://mylabcompliance.github.io/lab-qc-tools/method-verification.html","description":"Free CLIA method verification calculator: precision CV%, accuracy by method comparison (bias, slope, r) and reportable range recovery, with pass/fail.","applicationCategory":"HealthApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@id":"https://soundlabconsult.com/#org"}},{"@type":"Organization","@id":"https://soundlabconsult.com/#org","name":"Sound Lab Consultants","url":"https://soundlabconsult.com","telephone":"+1-602-874-1311","address":{"@type":"PostalAddress","streetAddress":"25 Arizona Pl","addressLocality":"Chandler","addressRegion":"AZ","postalCode":"85225","addressCountry":"US"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://soundlabconsult.com/"},{"@type":"ListItem","position":2,"name":"Free lab tools","item":"https://mylabcompliance.github.io/lab-qc-tools/"},{"@type":"ListItem","position":3,"name":"Method Verification Calculator","item":"https://mylabcompliance.github.io/lab-qc-tools/method-verification.html"}]}]}</script>
+<style>:root{--navy:#0f2a44;--green:#2e7d32;--ink:#1f2937;--muted:#5b6472;--line:#e5e7eb}*{box-sizing:border-box}
+body{margin:0;font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:#f6f8fa}
+header{background:var(--navy);color:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}header a{color:#fff;text-decoration:none}header .brand{font-weight:700}header small{display:block;color:#cbd5e1;font-weight:400}
+main{max-width:980px;margin:24px auto;padding:0 16px}.crumbs{font-size:14px;color:var(--muted)}.crumbs a{color:var(--muted)}
+h1{font-size:30px;line-height:1.2;margin:6px 0}.lede{color:var(--muted);max-width:760px}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px;margin:16px 0}.card:empty{display:none}
+label{display:block;font-weight:600;margin:10px 0 4px;font-size:14px}input,textarea,select{width:100%;padding:9px;border:1px solid #cfd5dc;border-radius:6px;font:inherit}
+fieldset{border:1px solid var(--line);border-radius:8px;margin:12px 0;padding:10px 14px}legend{font-weight:700;padding:0 4px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}.four{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}@media(max-width:720px){.two,.four{grid-template-columns:1fr}}
+.checks .chk{font-weight:400;display:flex;gap:8px;align-items:flex-start;margin:6px 0}.chk input{width:auto;margin-top:4px}
+.btn{display:inline-block;background:var(--green);color:#fff;border:0;border-radius:6px;padding:11px 18px;font:inherit;font-weight:700;cursor:pointer;text-decoration:none;margin-top:12px}.btn.ghost,.tabs .ghost{background:#fff;color:var(--navy);border:1px solid var(--navy)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.tabs button{border:1px solid var(--line);background:#fff;border-radius:6px;padding:8px 14px;font:inherit;cursor:pointer}.tabs button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.t{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px}.t th,.t td{border:1px solid var(--line);padding:6px 8px;text-align:left}.t th{background:#f3f4f6}
+.good,.bad{padding:10px 14px;border-radius:8px;margin:12px 0}.good{background:#e8f5e9;border-left:4px solid var(--green)}.bad{background:#fdecea;border-left:4px solid #c62828}
+.path{border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:10px 0}.path ul{margin:6px 0 0;padding-left:4px;list-style:none}.path li.ok{color:var(--green)}.path li.no{color:#b71c1c}
+.tag{font-size:12px;border-radius:10px;padding:2px 8px;margin-left:6px}.tag.ok{background:#e8f5e9;color:var(--green)}.tag.no{background:#fdecea;color:#b71c1c}
+.note{background:#fff7e6;border-left:3px solid #d97706;padding:8px 12px}.fine{font-size:13px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}.tile{display:block;text-decoration:none;color:inherit}.tile h2{font-size:19px;margin:0 0 6px}.tile span{color:var(--green);font-weight:700}
+.cta{background:var(--navy);color:#fff;border-radius:10px;padding:20px;margin:24px 0}.cta a{color:#fff}.cta .btn{margin-right:8px}
+footer{max-width:980px;margin:0 auto 80px;padding:0 16px}</style></head><body>
+<header><a class="brand" href="./">Free Lab QC Tools<small>open source · by Sound Lab Consultants</small></a><nav><a href="https://github.com/mylabcompliance/lab-qc-tools">GitHub</a></nav></header>
+<main>
+<h1>Method verification calculator</h1><p class="lede">Before reporting patient results on a new unmodified FDA-cleared test, CLIA requires you to verify accuracy, precision and reportable range (42 CFR 493.1253). Enter your data and your lab's acceptance criteria.</p><div class="tabs"><button data-tab="prec" class="on">Precision</button><button data-tab="acc">Accuracy</button><button data-tab="rr">Reportable range</button><button class="ghost" id="demo">Example data</button></div>
+<div class="card pane" id="prec"><label for="p-vals">Replicate results (same sample)</label><textarea id="p-vals" rows="4" placeholder="98.1 99.4 100.2 ..."></textarea>
+<label for="p-lim">Allowable CV% (your lab's criterion)</label><input id="p-lim" inputmode="decimal" placeholder="e.g. 3">
+<button class="btn" id="p-go">Calculate</button><div id="p-out" aria-live="polite"></div></div>
+<div class="card pane" id="acc" hidden><label for="a-vals">Paired results, one sample per line: comparison method, new method</label><textarea id="a-vals" rows="7" placeholder="52 53.1&#10;75 76.0"></textarea>
+<div class="two"><div><label for="a-tea">Allowable difference (±%)</label><input id="a-tea" inputmode="decimal" placeholder="e.g. 8"></div><div><label for="a-need">Required % of samples within it</label><input id="a-need" inputmode="decimal" value="90"></div></div>
+<button class="btn" id="a-go">Calculate</button><div id="a-out" aria-live="polite"></div></div>
+<div class="card pane" id="rr" hidden><label for="r-vals">One level per line: expected value, measured value</label><textarea id="r-vals" rows="6" placeholder="20 19.6&#10;100 101.5"></textarea>
+<label for="r-tol">Allowable recovery (100 ± %)</label><input id="r-tol" inputmode="decimal" placeholder="e.g. 5">
+<button class="btn" id="r-go">Calculate</button><div id="r-out" aria-live="polite"></div></div><h2>What CLIA asks for</h2><p>For an unmodified, FDA-cleared or approved moderate or high complexity test, the lab must show it can match the manufacturer's performance for <strong>accuracy, precision and reportable range</strong>, and confirm the manufacturer's reference intervals fit its patients (42 CFR 493.1253(b)(1)). Modified tests and lab-developed tests also need analytical sensitivity, specificity and any other relevant characteristics established (493.1253(b)(2)).</p>
+<p>Acceptance criteria are set by your laboratory director, often using manufacturer claims or CLIA proficiency testing limits (42 CFR 493 Subpart I). This calculator uses whatever criteria you enter; it does not choose them for you.</p>
+<div class="cta"><strong style="font-size:19px">Want an expert to do this for you?</strong><p>Sound Lab Consultants handles method validation, QC programs, personnel file reviews and survey preparation, remotely or on site. Prefer software? <a href="https://mylabcompliance.io">MyLabCompliance.io</a> tracks QC, competency and personnel files.</p>
+<a class="btn" href="https://calendar.app.google/9Cb6LrwFMurwbTJRA">Book a free consultation</a> <a href="tel:+16028741311">or call (602) 874-1311</a></div>
+<div class="card"><strong>More free tools</strong><ul><li><a href="westgard.html">Westgard QC Rules Calculator</a></li><li><a href="personnel-checker.html">CLIA Personnel Qualification Checker</a></li><li><a href="https://floridalabconsultant.com/tools/embed-clia-quiz/">Embed the Free CLIA Certificate Quiz</a></li><li><a href="https://floridalabconsultant.com/clia-quiz">Which CLIA certificate do I need? (quiz)</a></li></ul></div>
+</main><footer><p class="fine">Free tools from Sound Lab Consultants, an independent consulting firm not affiliated with CMS, CDC, FDA, state agencies or accreditors. General information, not legal advice. Calculations run in your browser; nothing you enter is stored. Open source: <a href="https://github.com/mylabcompliance/lab-qc-tools">github.com/mylabcompliance/lab-qc-tools</a>. Last reviewed 2026-11-24.</p></footer>
+<script>// Method verification: precision, accuracy (method comparison), reportable range. No dependencies.
+(function () {
+  const $ = (id) => document.getElementById(id);
+  const f = (x, d = 2) => (isFinite(x) ? Number(x).toFixed(d) : "-");
+  const nums = (s) => String(s || "").split(/[\s,;]+/).filter(Boolean).map(Number).filter(isFinite);
+  const pairs = (s) => String(s || "").split(/\n+/).map((l) => l.trim().split(/[\s,;\t]+/).map(Number)).filter((p) => p.length >= 2 && isFinite(p[0]) && isFinite(p[1]));
+  const mean = (a) => a.reduce((s, x) => s + x, 0) / a.length;
+  const sd = (a) => { const m = mean(a); return Math.sqrt(a.reduce((s, x) => s + (x - m) ** 2, 0) / (a.length - 1)); };
+  const verdict = (ok, msg) => `<div class="${ok ? "good" : "bad"}"><strong>${ok ? "Meets" : "Does not meet"} your criterion.</strong> ${msg}</div>`;
+  const track = (t) => { try { gtag && gtag("event", "tool_run", { tool: t }); } catch (_) {} };
+
+  document.querySelectorAll("[data-tab]").forEach((b) => (b.onclick = () => {
+    document.querySelectorAll("[data-tab]").forEach((x) => x.classList.toggle("on", x === b));
+    document.querySelectorAll(".pane").forEach((p) => (p.hidden = p.id !== b.dataset.tab));
+  }));
+
+  $("p-go").onclick = () => {
+    const a = nums($("p-vals").value), lim = parseFloat($("p-lim").value);
+    if (a.length < 2) return ($("p-out").innerHTML = "<p>Enter at least 2 replicate results (20 is typical).</p>");
+    const m = mean(a), s = sd(a), cv = (s / m) * 100;
+    let h = `<table class="t"><tr><th>n</th><th>Mean</th><th>SD</th><th>CV%</th><th>Min</th><th>Max</th></tr><tr><td>${a.length}</td><td>${f(m, 3)}</td><td>${f(s, 3)}</td><td>${f(cv)}</td><td>${f(Math.min(...a), 3)}</td><td>${f(Math.max(...a), 3)}</td></tr></table>`;
+    if (isFinite(lim)) h += verdict(cv <= lim, `Observed CV ${f(cv)}% vs. allowable ${f(lim)}%.`);
+    if (a.length < 20) h += `<p class="fine">Fewer than 20 replicates: many labs use 20 (for example, 2 levels over 10 to 20 days) for a defensible precision estimate. Follow your lab's verification plan.</p>`;
+    $("p-out").innerHTML = h; track("precision");
+  };
+
+  $("a-go").onclick = () => {
+    const p = pairs($("a-vals").value), tea = parseFloat($("a-tea").value), need = parseFloat($("a-need").value) || 90;
+    if (p.length < 3) return ($("a-out").innerHTML = "<p>Enter at least 3 pairs, one per line: comparison result, new method result (20 or more is typical).</p>");
+    const x = p.map((q) => q[0]), y = p.map((q) => q[1]), mx = mean(x), my = mean(y);
+    const sxx = x.reduce((s, v) => s + (v - mx) ** 2, 0), sxy = x.reduce((s, v, i) => s + (v - mx) * (y[i] - my), 0), syy = y.reduce((s, v) => s + (v - my) ** 2, 0);
+    const slope = sxy / sxx, icpt = my - slope * mx, r = sxy / Math.sqrt(sxx * syy);
+    const d = p.map(([a, b]) => b - a), pd = p.map(([a, b]) => (a ? ((b - a) / a) * 100 : NaN));
+    const within = isFinite(tea) ? p.filter(([a, b]) => a && Math.abs((b - a) / a) * 100 <= tea).length : NaN;
+    let h = `<table class="t"><tr><th>n</th><th>Mean bias</th><th>Mean % bias</th><th>Slope</th><th>Intercept</th><th>r</th></tr><tr><td>${p.length}</td><td>${f(mean(d), 3)}</td><td>${f(mean(pd.filter(isFinite)))}%</td><td>${f(slope, 3)}</td><td>${f(icpt, 3)}</td><td>${f(r, 4)}</td></tr></table>`;
+    if (isFinite(tea)) h += verdict((within / p.length) * 100 >= need, `${within} of ${p.length} results (${f((within / p.length) * 100, 1)}%) are within ±${f(tea, 1)}% of the comparison method; your criterion is ${f(need, 0)}%.`);
+    h += `<p class="fine">Slope and intercept use ordinary least squares. If r is below about 0.975, the range is too narrow for reliable regression; judge by bias and the % within limits instead.</p>`;
+    $("a-out").innerHTML = h; track("accuracy");
+  };
+
+  $("r-go").onclick = () => {
+    const p = pairs($("r-vals").value), tol = parseFloat($("r-tol").value);
+    if (p.length < 3) return ($("r-out").innerHTML = "<p>Enter at least 3 levels, one per line: expected value, measured value (5 levels across the claimed range is typical).</p>");
+    p.sort((a, b) => a[0] - b[0]);
+    const rows = p.map(([e, m]) => { const rec = e ? (m / e) * 100 : NaN; return { e, m, rec, ok: isFinite(tol) ? Math.abs(rec - 100) <= tol : true }; });
+    let h = `<table class="t"><tr><th>Expected</th><th>Measured</th><th>Recovery</th><th>Result</th></tr>` + rows.map((q) => `<tr><td>${f(q.e, 3)}</td><td>${f(q.m, 3)}</td><td>${f(q.rec, 1)}%</td><td>${isFinite(tol) ? (q.ok ? "Pass" : "Fail") : "-"}</td></tr>`).join("") + `</table>`;
+    if (isFinite(tol)) {
+      const ok = rows.every((q) => q.ok);
+      h += verdict(ok, ok ? `Every level recovered within 100 ± ${f(tol, 1)}%. The verified reportable range is ${f(rows[0].e, 3)} to ${f(rows[rows.length - 1].e, 3)}.` : `Levels outside 100 ± ${f(tol, 1)}% fall outside the verified range. Report only within the levels that passed, or investigate.`);
+    }
+    $("r-out").innerHTML = h; track("reportable_range");
+  };
+
+  $("demo").onclick = () => {
+    $("p-vals").value = "98.1 99.4 100.2 101.0 99.8 100.5 98.9 99.6 100.9 101.3 99.2 100.0 98.7 100.8 99.9 100.3 101.1 99.5 100.6 99.0"; $("p-lim").value = "3";
+    $("a-vals").value = "52 53.1\n75 76.0\n98 97.2\n120 122.5\n145 147.0\n180 178.9\n210 214.1\n260 258.0\n300 305.2\n350 352.8";
+    $("a-tea").value = "8"; $("a-need").value = "90";
+    $("r-vals").value = "20 19.6\n100 101.5\n250 248.0\n400 404.1\n600 589.0"; $("r-tol").value = "5";
+    $("p-go").onclick(); $("a-go").onclick(); $("r-go").onclick();
+  };
+})();
+</script></body></html>
